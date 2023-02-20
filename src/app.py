@@ -52,11 +52,14 @@ async def getDeeplTranslation(sentence: str, tolang: str):
 @app.get("/")
 async def getTranslation(sentence: str, tolang: str, token: str):
     await checkAuthToken(token)
-    dotsentences = sentence.split(".")
-    for i,dot in enumerate(dotsentences):
-        commasentences = dot.split(",")
-        for j, sentence in enumerate(commasentences):
-            if len(sentence) > 0:
-                commasentences[j] = await getDeeplTranslation(sentence, tolang)
-        dotsentences[i] = ",".join(commasentences)
-    return ".".join(dotsentences)
+    breaksentences = sentence.split("\n")
+    for i, sentence in enumerate(breaksentences):
+        dotsentences = sentence.split(".")
+        for j,dot in enumerate(dotsentences):
+            commasentences = dot.split(",")
+            for k, sentence in enumerate(commasentences):
+                if len(sentence) > 0:
+                    commasentences[k] = await getDeeplTranslation(sentence, tolang)
+            dotsentences[j] = ",".join(commasentences)
+        breaksentences[i] = ".".join(dotsentences)
+    return "\n".join(breaksentences)
