@@ -1,0 +1,5 @@
+deepl
+pymongo
+uvicorn
+fastapi
+python-dotenv

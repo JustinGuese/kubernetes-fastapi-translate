@@ -1,0 +1,11 @@
+version: "3"
+services:
+  translator:
+    image: guestros/translator:latest
+    build: ./src/
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URI: "mongodb://localhost"
+    env_file:
+      - .env
