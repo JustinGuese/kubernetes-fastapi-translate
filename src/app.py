@@ -46,7 +46,7 @@ async def getDeeplTranslation(sentence: str, tolang: str):
         
         app.collection.update_one({"_id": key}, {"$set": {tolang: translated_text}}, upsert=True)
     else:
-        app.collection.insert_one({"_id": key, tolang: translated_text})
+        app.collection.insert_one({"_id": key, tolang: translated_text, "EN": sentence})
     return translated_text
     
 @app.get("/")
