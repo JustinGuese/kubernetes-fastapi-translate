@@ -1,4 +1,4 @@
-deepl
+openai
 pymongo
 uvicorn
 fastapi

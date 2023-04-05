@@ -26,11 +26,11 @@ spec:
     spec:
       containers:
         - env:
-            - name: DEEPLKEY
+            - name: OPENAI_API_KEY
               valueFrom:
                 secretKeyRef:
-                  key: DEEPLKEY
-                  name: deeplkey
+                  key: OPENAI_API_KEY
+                  name: openai
             - name: AUTHTOKEN
               valueFrom:
                 secretKeyRef:
