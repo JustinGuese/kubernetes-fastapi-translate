@@ -74,7 +74,7 @@ async def getGPTTranslation(sentence: str, tolang: str):
         model = MODEL,
         messages = [{"role":"system","content":prompt}]
         )
-    translated_text = response["choices"][0]["message"]["content"].replace(".,",",") # fix weird gpt quirks
+    translated_text = response["choices"][0]["message"]["content"]
     usage = response["usage"]["total_tokens"]
     TOTALCOST += usage/1000*0.002
     print("crnt totalcost %.2f$ since startup - i got the translation: %s" % (TOTALCOST, translated_text))
@@ -99,4 +99,4 @@ async def getTranslation(sentence: str, tolang: str, token: str):
                     commasentences[k] = await getGPTTranslation(sentence, tolang)
             dotsentences[j] = ",".join(commasentences)
         breaksentences[i] = ".".join(dotsentences)
-    return "\n".join(breaksentences)
+    return "\n".join(breaksentences).replace(".,",",") # fix weird gpt quirks
