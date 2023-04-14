@@ -60,6 +60,7 @@ async def checkAuthToken(token: str):
 #         app.collection.insert_one({"_id": key, tolang: translated_text, "EN": sentence})
 #     return translated_text
 async def getGPTTranslation(sentence: str, tolang: str):
+    global TOTALCOST, MODEL, TOLANG
     key = sha256(sentence.encode()).hexdigest()
     mongoresult = app.collection.find_one({"_id": key})
     if mongoresult:
